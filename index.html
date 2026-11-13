@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Toko Baju - Dashboard</title>
+
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <!-- HALAMAN LOGIN -->
+    <section id="loginPage" class="login-page">
+        <div class="login-box">
+
+            <h1>TOKO BAJU</h1>
+            <p>Silakan masuk ke akun Anda</p>
+
+            <form id="loginForm">
+
+                <label>Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Masukkan username"
+                    required
+                >
+
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Masukkan password"
+                    required
+                >
+
+                <button type="submit">LOGIN</button>
+
+                <p id="loginError"></p>
+
+            </form>
+
+        </div>
+    </section>
+
+
+    <!-- APLIKASI UTAMA -->
+    <div id="appPage" class="app-container" hidden>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>TOKO BAJU</h2>
+                <p>Management System</p>
+            </div>
+
+            <nav>
+
+                <a href="#" class="menu active" data-page="dashboard">
+                    Dashboard
+                </a>
+
+                <a href="#" class="menu" data-page="produk">
+                    Produk
+                </a>
+
+                <a href="#" class="menu" data-page="penjualan">
+                    Penjualan
+                </a>
+
+                <a href="#" class="menu" data-page="laporan">
+                    Laporan
+                </a>
+
+                <a href="#" id="logoutButton" class="menu logout">
+                    Logout
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- KONTEN UTAMA -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="topbar">
+
+                <div>
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p>Selamat datang di aplikasi Toko Baju</p>
+                </div>
+
+                <div class="admin">
+                    Admin
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page active">
+
+                <div class="welcome">
+                    <h2>Dashboard Toko Baju</h2>
+                    <p>Ringkasan informasi penjualan toko Anda.</p>
+                </div>
+
+                <div class="summary-grid">
+
+                    <div class="summary-card">
+                        <p>Total Produk</p>
+                        <h2 id="totalProduk">120</h2>
+                    </div>
+
+                    <div class="summary-card">
+                        <p>Total Penjualan</p>
+                        <h2 id="totalPenjualan">Rp 5.250.000</h2>
+                    </div>
+
+                    <div class="summary-card">
+                        <p>Total Transaksi</p>
+                        <h2 id="totalTransaksi">45</h2>
+                    </div>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Grafik Penjualan</h3>
+
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Produk Terjual</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Produk</th>
+                                <th>Harga</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="dashboardProducts">
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN PRODUK -->
+            <section id="produk" class="page">
+
+                <div class="welcome">
+                    <h2>Data Produk</h2>
+                    <p>Kelola produk toko baju Anda.</p>
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Tambah Produk</h3>
+
+                    <form id="productForm">
+
+                        <div class="form-grid">
+
+                            <div>
+                                <label>Nama Produk</label>
+                                <input
+                                    type="text"
+                                    id="namaProduk"
+                                    placeholder="Nama produk"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label>Kategori</label>
+                                <select id="kategoriProduk" required>
+                                    <option value="">Pilih kategori</option>
+                                    <option>Kaos</option>
+                                    <option>Kemeja</option>
+                                    <option>Hoodie</option>
+                                    <option>Celana</option>
+                                    <option>Jaket</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Ukuran</label>
+                                <select id="ukuranProduk" required>
+                                    <option value="">Pilih ukuran</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                    <option>All Size</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Stok</label>
+                                <input
+                                    type="number"
+                                    id="stokProduk"
+                                    min="0"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label>Harga</label>
+                                <input
+                                    type="number"
+                                    id="hargaProduk"
+                                    min="0"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            + Simpan Produk
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Daftar Produk</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Produk</th>
+                                <th>Kategori</th>
+                                <th>Ukuran</th>
+                                <th>Stok</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="productTable">
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN PENJUALAN -->
+            <section id="penjualan" class="page">
+
+                <div class="welcome">
+                    <h2>Data Penjualan</h2>
+                    <p>Kelola transaksi penjualan toko.</p>
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Tambah Transaksi</h3>
+
+                    <form id="salesForm">
+
+                        <div class="form-grid">
+
+                            <div>
+                                <label>Nama Pelanggan</label>
+                                <input
+                                    type="text"
+                                    id="namaPelanggan"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label>Produk</label>
+                                <select id="produkTerjual" required>
+                                    <option value="">Pilih produk</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Jumlah</label>
+                                <input
+                                    type="number"
+                                    id="jumlahTerjual"
+                                    min="1"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label>Tanggal</label>
+                                <input
+                                    type="date"
+                                    id="tanggalPenjualan"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            + Simpan Transaksi
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Riwayat Penjualan</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Pelanggan</th>
+                                <th>Produk</th>
+                                <th>Jumlah</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="salesTable">
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN LAPORAN -->
+            <section id="laporan" class="page">
+
+                <div class="welcome">
+                    <h2>Laporan Penjualan</h2>
+                    <p>Informasi pendapatan dan transaksi toko.</p>
+                </div>
+
+                <div class="summary-grid">
+
+                    <div class="summary-card">
+                        <p>Total Pendapatan</p>
+                        <h2 id="laporanPendapatan">Rp 0</h2>
+                    </div>
+
+                    <div class="summary-card">
+                        <p>Total Transaksi</p>
+                        <h2 id="laporanTransaksi">0</h2>
+                    </div>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h3>Detail Laporan</h3>
+
+                    <button
+                        class="btn-primary"
+                        onclick="window.print()"
+                    >
+                        Cetak Laporan
+                    </button>
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Pelanggan</th>
+                                <th>Produk</th>
+                                <th>Jumlah</th>
+                                <th>Total Penjualan</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="assets/script.js"></script>
+
+</body>
+</html>
